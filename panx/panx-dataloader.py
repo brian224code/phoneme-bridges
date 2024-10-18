@@ -1,6 +1,10 @@
 import pandas as pd
 import csv
 
+def join_tokens(tokens):
+    # Join tokens with spaces
+    return " ".join(tokens)
+
 def read_file(file_path, output_file):
     # Read the data using pandas
     data = pd.read_csv(
@@ -26,8 +30,8 @@ def read_file(file_path, output_file):
         if pd.isnull(row['Token']):
             # End of a sentence
             if temp_sentence:
-                sentences.append(temp_sentence)
-                tags.append(temp_tags)
+                sentences.append(join_tokens(temp_sentence))
+                tags.append(" ".join(temp_tags))
                 temp_sentence = []
                 temp_tags = []
         else:
@@ -37,8 +41,8 @@ def read_file(file_path, output_file):
 
     # Add the last sentence if it wasn't added
     if temp_sentence:
-        sentences.append(temp_sentence)
-        tags.append(temp_tags)
+        sentences.append(join_tokens(temp_sentence))
+        tags.append(" ".join(temp_tags))
 
     # Create a DataFrame with sentences and their corresponding tags
     df_sentences = pd.DataFrame({'Sentence': sentences, 'Tags': tags})
