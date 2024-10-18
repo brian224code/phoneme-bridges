@@ -52,10 +52,10 @@ def read_file(file_path, output_file):
 def process_datasets():
     # List of datasets
     datasets = [
-        ('../panx/train-hi.tsv', '../panx/train-hi.csv'),
-        ('../panx/dev-hi.tsv', '../panx/dev-hi.csv'),
-        ('../panx/train-ur.tsv', '../panx/train-ur.csv'),
-        ('../panx/dev-ur.tsv', '../panx/dev-ur.csv')
+        ('../../panx/train-hi.tsv', '../../panx/train-hi.csv'),
+        ('../../panx/dev-hi.tsv', '../../panx/dev-hi.csv'),
+        ('../../panx/train-ur.tsv', '../../panx/train-ur.csv'),
+        ('../../panx/dev-ur.tsv', '../../panx/dev-ur.csv')
     ]
 
     # Process each dataset
