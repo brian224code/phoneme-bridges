@@ -31,7 +31,7 @@ def transliterate_sentence(sentence, language):
     transliterated_words = [transliterate_word(word, language) for word in sentence]
     return " ".join(transliterated_words)
 
-def read_file(file_path, output_file, language):
+def read_file(file_path, output_file, language, missing_words):
     # Read the data using pandas
     data = pd.read_csv(
         file_path,
@@ -67,6 +67,10 @@ def read_file(file_path, output_file, language):
             temp_sentence.append(row['Token'])
             temp_tags.append(row['Tag'])
 
+            # Track missing Urdu words
+            if language == 'ur' and row['Token'] not in urdu_dict:
+                missing_words.add(row['Token'])
+
     # Add the last sentence if it wasn't added
     if temp_sentence:
         sentences.append(join_tokens(temp_sentence))
@@ -80,8 +84,7 @@ def read_file(file_path, output_file, language):
     df_sentences.to_csv(output_file, index=False)
 
     # Display the first few sentences
-    # print(df_sentences.head())
-
+    print(df_sentences.head())
 def process_datasets():
     # List of datasets
     datasets = [
@@ -95,6 +98,9 @@ def process_datasets():
     total_urdu_words = 0
     transliterated_urdu_words = 0
 
+    # Set to track missing Urdu words
+    missing_words = set()
+
     # Process each dataset
     for input_file, output_file, language in datasets:
         print(f"Processing {input_file}...")
@@ -106,12 +112,18 @@ def process_datasets():
                         total_urdu_words += 1
                         if word in urdu_dict:
                             transliterated_urdu_words += 1
-        read_file(input_file, output_file, language)
+        read_file(input_file, output_file, language, missing_words)
         print(f"Saved to {output_file}")
 
     if total_urdu_words > 0:
         percentage_transliterated = (transliterated_urdu_words / total_urdu_words) * 100
         print(f"Percentage of Urdu words successfully transliterated: {percentage_transliterated:.2f}%")
+
+    # Save missing Urdu words to a separate file
+    with open("missing_urdu_words.txt", "w", encoding="utf-8") as file:
+        for word in sorted(missing_words):
+            file.write(word + "\n")
+    print(f"Missing Urdu words saved to missing_urdu_words.txt")
 
 if __name__ == "__main__":
     process_datasets()
