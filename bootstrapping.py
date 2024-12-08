@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.metrics import f1_score
 from transformers import BertTokenizerFast, BertForTokenClassification
 
-
+# adjust entity types when used for POS-tagging versus NER
 entity_types = ['O', 'B-PER', 'I-PER', 'B-ORG', 'I-ORG', 'B-LOC', 'I-LOC']
 
 num_labels = len(entity_types)
