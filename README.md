@@ -1,18 +1,20 @@
-### Phoneme Bridges: Leveraging Phonetic Similarity for Low-Resource Language Understanding
+## Phoneme Bridges: Leveraging Phonetic Similarity for Low-Resource Language Understanding
 Chris Ge, Brian Le, Daria Kryvosheieva | Final project for MIT 6.8611: Quantitative Methods for Natural Language Processing
 
-#### Project Overview
+### Project Overview
 Our project aims to improve language model performance on NLP tasks in **low-resource languages** (LRLs) through knowledge transfer from **high-resource languages** (HRLs). We especially focus on HRL-LRL pairs that share many **similar words in pronunciation** but use **different writing systems**. To enable knowledge transfer in this scenario, we use the **STILTs** finetuning method ([Phang et al., 2018](https://arxiv.org/pdf/1811.01088)) and augment our finetuning datasets with **romanizations**. We choose **mBERT** as an example model and **Hindi-Urdu** as an example HRL-LRL pair.
 
-#### Our Pipeline
+### Our Pipeline
 1. Pick an NLP task. We experiment with named entity recognition (NER) and part-of-speech (POS) tagging.
 2. Gather a dataset for the task in each of the LRL and the HRL. Retrieve the romanizations of the two datasets’ input texts using a transliterator.
 3. Fine-tune the language model on the NLP task in the HRL, randomly replacing a fixed proportion of words in the input text of the data by their romanizations.
 4. Further fine-tune and evaluate the resulting model on the LRL task with both text and romanization.
 
+We use the **ai4bharat** transliterator and the **PAN-X** and **UD-POS** datasets for NER and POS tagging, respectively.
+
 (TODO: add image)
 
-#### Experiments
+### Experiments
 
 For each of the PAN-X and UD-POS datasets, we fine-tune **four** versions of mBERT:
 1. **mBERT<sub>text</sub>**: mBERT fine-tuned directly on the Urdu dataset (no romanizations);
@@ -22,7 +24,7 @@ For each of the PAN-X and UD-POS datasets, we fine-tune **four** versions of mBE
 
 (TODO: add image)
 
-#### Results
+### Results
 
 Table 1 shows the performance of our models (measured as macro-F1 score) on the two tasks, and Table 2 shows the results of our statistical significance test (paired bootstrap resampling). Overall, our method yielded **improvement**, but it was **not statistically significant**.
 
