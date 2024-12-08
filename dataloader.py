@@ -53,21 +53,19 @@ def read_file(file_path, output_file):
     # Display the first few sentences
     print(df_sentences.head())
 
-def process_datasets():
-    # List of datasets
-    datasets = [
-        ('../../udpos/train-hi.tsv', '../../udpos/train-hi.csv'),
-        ('../../udpos/dev-hi.tsv', '../../udpos/dev-hi.csv'),
-        ('../../udpos/train-ur.tsv', '../../udpos/train-ur.csv'),
-        ('../../udpos/dev-ur.tsv', '../../udpos/dev-ur.csv')
-    ]
-
-    # Process each dataset
+def process_datasets(datasets):
     for input_file, output_file in datasets:
         print(f"Processing {input_file}...")
         read_file(input_file, output_file)
         print(f"Saved to {output_file}")
 
 if __name__ == "__main__":
-    process_datasets()
+    # Examole list of datasets
+    datasets = [
+        ('../../udpos/train-hi.tsv', '../../udpos/train-hi.csv'),
+        ('../../udpos/dev-hi.tsv', '../../udpos/dev-hi.csv'),
+        ('../../udpos/train-ur.tsv', '../../udpos/train-ur.csv'),
+        ('../../udpos/dev-ur.tsv', '../../udpos/dev-ur.csv')
+    ]
+    process_datasets(datasets)
 
