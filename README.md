@@ -10,7 +10,7 @@ Our project aims to improve language model performance on NLP tasks in **low-res
 3. Fine-tune the language model on the NLP task in the HRL, randomly replacing a fixed proportion of words in the input text of the data by their romanizations.
 4. Further fine-tune and evaluate the resulting model on the LRL task with both text and romanization.
 
-We use the **ai4bharat** transliterator and the **PAN-X** and **UD-POS** datasets for NER and POS tagging, respectively.
+We use the [**ai4bharat**](https://github.com/AI4Bharat/IndicXlit) transliterator and the **PAN-X** and **UD-POS** datasets from [Google Xtreme](https://github.com/google-research/xtreme) for NER and POS tagging, respectively.
 
 <p align="center">
   <kbd><img src="../assets/Pipeline.png" width="600px"></kbd>
