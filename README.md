@@ -85,3 +85,11 @@ Table 1 shows the performance of our models (measured as macro-F1 score) on the 
 
 <p style="font-size: 10pt;">Table 2: Statistical test results.</p>
 
+### Code in This Repo
+
+* `panx`, `udpos`: fine-tune and evaluate models on the respective datasets
+* `BertViz_panx.py`, `BertViz_udpos.py`: Examine attention paid to romanizations using BertViz
+* `bootstrapping.py`: the paired bootstrap resampling significance test
+* `dataloader.py`: load datasets
+* `romanization.py`: generate romanization-augmented versions of the datasets
+
