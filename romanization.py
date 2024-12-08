@@ -65,6 +65,9 @@ if __name__ == "__main__":
     obtainRomanizations('hi', 'dev-hi.csv', 'dev-hi-romanized.csv')
 
     # Example usage to randomly replace 25% of words in dataset with romanizations
+    # 25% random replacement was used for augmenting Hindi data with romanizations
+    # Urdu used a full concatenation method and is handled in the fine-tune and evaluation code
+    
     # probability = 0.25
     # datasets = [
     #     '../udpos/train-hi-romanized.csv',
