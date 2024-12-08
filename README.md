@@ -10,9 +10,12 @@ Our project aims to improve language model performance on NLP tasks in **low-res
 3. Fine-tune the language model on the NLP task in the HRL, randomly replacing a fixed proportion of words in the input text of the data by their romanizations.
 4. Further fine-tune and evaluate the resulting model on the LRL task with both text and romanization.
 
-We use the **ai4bharat** transliterator and the **PAN-X** and **UD-POS** datasets for NER and POS tagging, respectively.
+We use the [**ai4bharat**](https://github.com/AI4Bharat/IndicXlit) transliterator and the **PAN-X** and **UD-POS** datasets from [Google Xtreme](https://github.com/google-research/xtreme) for NER and POS tagging, respectively.
 
-(TODO: add image)
+<p align="center">
+  <kbd><img src="../assets/Pipeline.png" width="600px"></kbd>
+  <p align="center" style="font-size: 10pt;">Figure 1: Our pipeline, shown here for the task of NER.</p>
+</p>
 
 ### Experiments
 
@@ -22,12 +25,15 @@ For each of the PAN-X and UD-POS datasets, we fine-tune **four** versions of mBE
 3. **mBERT<sub>STILTs+text</sub>**: mBERT intermediately fine-tuned on the Hindi dataset, then further fine-tuned on the Urdu dataset (no romanizations);
 4. **mBERT<sub>STILTs+roman</sub>**: mBERT intermediately fine-tuned on the Hindi dataset (with a quarter of the words replaced with romanizations), then further fine-tuned on the Urdu dataset (with romanizations concatenated).
 
-(TODO: add image)
+<p align="center">
+  <kbd><img src="../assets/Models.JPG" width="600px"></kbd>
+  <p align="center" style="font-size: 10pt;">Figure 2: Our four fine-tuned models and relevant comparisons.</p>
+</p>
 
 ### Results
 
 Table 1 shows the performance of our models (measured as macro-F1 score) on the two tasks, and Table 2 shows the results of our statistical significance test (paired bootstrap resampling). Overall, our method yielded **improvement**, but it was **not statistically significant**.
-
+    
 | Model | POS Tagging Score | NER Score |
 |-------|-------------------|-----------|
 | mBERT<sub>text</sub> | 0.8700 | 0.9770 |
@@ -35,8 +41,8 @@ Table 1 shows the performance of our models (measured as macro-F1 score) on the 
 | mBERT<sub>STILTs+text</sub> | 0.8702 | 0.9763 |
 | mBERT<sub>STILTs+roman</sub> | 0.8735 | 0.9788 |
 
-Table 1: Our results (macro-F1 scores) for POS tagging and NER.
-
+<p style="font-size: 10pt;"> Table 1: Our results (macro-F1 scores) for POS tagging and NER. </p>
+    
 <table>
     <thead>
         <tr>
@@ -77,4 +83,13 @@ Table 1: Our results (macro-F1 scores) for POS tagging and NER.
     </tbody>
 </table>
 
-Table 2: Statistical test results.
+<p style="font-size: 10pt;">Table 2: Statistical test results.</p>
+
+### Code in This Repo
+
+* `panx`, `udpos`: fine-tune and evaluate models on the respective datasets
+* `BertViz_panx.py`, `BertViz_udpos.py`: Examine attention paid to romanizations using BertViz
+* `bootstrapping.py`: the paired bootstrap resampling significance test
+* `dataloader.py`: load datasets
+* `romanization.py`: generate romanization-augmented versions of the datasets
+
